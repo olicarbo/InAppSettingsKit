@@ -766,6 +766,10 @@ CGRect IASKCGRectSwap(CGRect rect);
                     [mailViewController setMessageBody:[specifier localizedObjectForKey:kIASKMailComposeBody] isHTML:isHTML];
                 }
             }
+            if ([self.delegate respondsToSelector:@selector(settingsViewController:mailAttachFileForSpecifier:)]) {
+                NSDictionary* attachementInfo = [self.delegate settingsViewController:self mailAttachFileForSpecifier:specifier];
+                [mailViewController addAttachmentData:[attachementInfo objectForKey:@"DATA"] mimeType:[attachementInfo objectForKey:@"MIMETYPE"] fileName:[attachementInfo objectForKey:@"FILENAME"]];
+            }
 
             UIViewController<MFMailComposeViewControllerDelegate> *vc = nil;
             
