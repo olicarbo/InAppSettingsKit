@@ -782,9 +782,7 @@ CGRect IASKCGRectSwap(CGRect rect);
             }
             
             mailViewController.mailComposeDelegate = vc;
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 50000)
-#pragma message "Now that we're iOS5 and up, remove this workaround"
-#endif
+
             if([vc respondsToSelector:@selector(presentViewController:animated:completion:)]) {
                 [vc presentViewController:mailViewController
                                    animated:YES
@@ -828,9 +826,6 @@ CGRect IASKCGRectSwap(CGRect rect);
                                          error:error];
      }
     
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 50000)
-#pragma message "Now that we're iOS5 and up, remove this workaround"
-#endif
     if([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
         [self dismissViewControllerAnimated:YES
                                  completion:nil];
