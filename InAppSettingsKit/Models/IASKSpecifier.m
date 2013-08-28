@@ -271,7 +271,7 @@
         return NSTextAlignmentRight;
     }
     if ([self.type isEqualToString:kIASKButtonSpecifier] && !self.cellImage) {
-		return NSTextAlignmentCenter;
+		return NSTextAlignmentLeft;
 	} else if ([self.type isEqualToString:kIASKPSMultiValueSpecifier] || [self.type isEqualToString:kIASKPSTitleValueSpecifier]) {
 		return NSTextAlignmentRight;
 	}
