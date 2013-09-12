@@ -46,13 +46,6 @@
     self.view = webView;
 }
 
-- (void)dealloc {
-	[webView release], webView = nil;
-	[url release], url = nil;
-	
-	[super dealloc];
-}
-
 - (void)viewWillAppear:(BOOL)animated {  
 	[webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
@@ -102,11 +95,10 @@
 				NSString *key = [[keyValue objectAtIndex:0] lowercaseString];
 				NSString *value = [keyValue objectAtIndex:1];
 				
-				value =  (NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
+				value =  CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
 																							 (CFStringRef)value,
 																							 CFSTR(""),
-																							 kCFStringEncodingUTF8);
-				[value autorelease];
+																							 kCFStringEncodingUTF8));
 				
 				if ([key isEqualToString:@"subject"]) {
 					[mailViewController setSubject:value];
@@ -134,17 +126,9 @@
 		
 		[mailViewController setToRecipients:toRecipients];
 
-    if([self respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-        [self presentViewController:mailViewController
-                           animated:YES
-                         completion:nil];
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        [self presentModalViewController:mailViewController animated:YES];
-#pragma clang diagnostic pop
-    }
-		[mailViewController release];
+    [self presentViewController:mailViewController
+                       animated:YES
+                     completion:nil];
 		return NO;
 	}
 	
@@ -157,19 +141,8 @@
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-    
-    if([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-        [self dismissViewControllerAnimated:YES
-                                 completion:nil];
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        [self dismissModalViewControllerAnimated:YES];
-#pragma clang diagnostic pop
-
-    }
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
-
-
 
 @end
