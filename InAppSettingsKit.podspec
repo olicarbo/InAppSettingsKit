@@ -12,5 +12,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = 'InAppSettingsKit/**/*.{h,m}'
   s.framework = 'MessageUI'
+  s.requires_arc = true
 
 end
