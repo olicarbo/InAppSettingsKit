@@ -34,6 +34,7 @@
 - (float)floatForKey:(NSString*)key;
 - (double)doubleForKey:(NSString*)key;
 - (NSInteger)integerForKey:(NSString*)key;
+- (void)removeObjectForKey:(NSString*)key;
 @end
 
 
