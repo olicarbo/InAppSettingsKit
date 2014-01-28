@@ -39,6 +39,8 @@
 #pragma mark - UITableView cell customization
 - (CGFloat)tableView:(UITableView*)tableView heightForSpecifier:(IASKSpecifier*)specifier;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForSpecifier:(IASKSpecifier*)specifier;
+- (UIImage*)tableView:(UITableView*)tableView imageForSpecifier:(IASKSpecifier*)specifier;
+- (UIImage*)tableView:(UITableView*)tableView highlightedImageForSpecifier:(IASKSpecifier*)specifier;
 
 #pragma mark - mail composing customization
 - (NSString*) settingsViewController:(id<IASKViewController>)settingsViewController

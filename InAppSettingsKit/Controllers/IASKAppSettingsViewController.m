@@ -567,7 +567,14 @@ CGRect IASKCGRectSwap(CGRect rect);
 	}
     
 	cell.imageView.image = specifier.cellImage;
+    if (!cell.imageView.image && [self.delegate respondsToSelector:@selector(tableView:imageForSpecifier:)]) {
+        cell.imageView.image = [self.delegate tableView:tableView imageForSpecifier:specifier];
+    }
+    
 	cell.imageView.highlightedImage = specifier.highlightedCellImage;
+    if (!cell.imageView.highlightedImage && [self.delegate respondsToSelector:@selector(tableView:highlightedImageForSpecifier:)]) {
+        cell.imageView.highlightedImage = [self.delegate tableView:tableView highlightedImageForSpecifier:specifier];
+    }
     
 	if (![specifier.type isEqualToString:kIASKPSMultiValueSpecifier] && ![specifier.type isEqualToString:kIASKPSTitleValueSpecifier] && ![specifier.type isEqualToString:kIASKPSTextFieldSpecifier]) {
 		cell.textLabel.textAlignment = specifier.textAlignment;
