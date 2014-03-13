@@ -39,6 +39,8 @@
 #pragma mark - UITableView cell customization
 - (CGFloat)tableView:(UITableView*)tableView heightForSpecifier:(IASKSpecifier*)specifier;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForSpecifier:(IASKSpecifier*)specifier;
+- (UIColor*)tableView:(UITableView*)tableView backgroundColorForSpecifier:(IASKSpecifier*)specifier;
+- (CGFloat)tableView:(UITableView*)tableView alphaForSpecifier:(IASKSpecifier*)specifier;
 - (UIImage*)tableView:(UITableView*)tableView imageForSpecifier:(IASKSpecifier*)specifier;
 - (UIImage*)tableView:(UITableView*)tableView highlightedImageForSpecifier:(IASKSpecifier*)specifier;
 

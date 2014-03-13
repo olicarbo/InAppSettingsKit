@@ -576,12 +576,21 @@ CGRect IASKCGRectSwap(CGRect rect);
         cell.imageView.highlightedImage = [self.delegate tableView:tableView highlightedImageForSpecifier:specifier];
     }
     
+    if ([self.delegate respondsToSelector:@selector(tableView:backgroundColorForSpecifier:)]) {
+        cell.backgroundColor = [self.delegate tableView:tableView backgroundColorForSpecifier:specifier];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(tableView:alphaForSpecifier:)]) {
+        cell.alpha = [self.delegate tableView:tableView alphaForSpecifier:specifier];
+    }
+    
 	if (![specifier.type isEqualToString:kIASKPSMultiValueSpecifier] && ![specifier.type isEqualToString:kIASKPSTitleValueSpecifier] && ![specifier.type isEqualToString:kIASKPSTextFieldSpecifier]) {
 		cell.textLabel.textAlignment = specifier.textAlignment;
 	}
 	cell.detailTextLabel.textAlignment = specifier.textAlignment;
 	cell.textLabel.adjustsFontSizeToFitWidth = specifier.adjustsFontSizeToFitWidth;
 	cell.detailTextLabel.adjustsFontSizeToFitWidth = specifier.adjustsFontSizeToFitWidth;
+    
     return cell;
 }
 
