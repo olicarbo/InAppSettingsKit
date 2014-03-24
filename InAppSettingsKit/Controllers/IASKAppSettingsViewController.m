@@ -191,6 +191,10 @@ CGRect IASKCGRectSwap(CGRect rect);
 	[dc addObserver:self selector:@selector(synchronizeSettings) name:UIApplicationDidEnterBackgroundNotification object:[UIApplication sharedApplication]];
 	[dc addObserver:self selector:@selector(reload) name:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication]];
 	[dc addObserver:self selector:@selector(synchronizeSettings) name:UIApplicationWillTerminateNotification object:[UIApplication sharedApplication]];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(settingsViewControllerDidAppear:)]) {
+		[self.delegate settingsViewControllerDidAppear:self];
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -208,7 +212,20 @@ CGRect IASKCGRectSwap(CGRect rect);
     // hide the keyboard
     [self.currentFirstResponder resignFirstResponder];
 	
+    if (self.delegate && [self.delegate respondsToSelector:@selector(settingsViewControllerDidDisappear:)]) {
+		[self.delegate settingsViewControllerDidDisappear:self];
+	}
+    
 	[super viewDidDisappear:animated];
+}
+
+- (void) didMoveToParentViewController:(UIViewController *)parent
+{
+    [super didMoveToParentViewController:parent];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(settingsViewController:didMoveToParentViewController:)]) {
+		[self.delegate settingsViewController:self didMoveToParentViewController:parent];
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

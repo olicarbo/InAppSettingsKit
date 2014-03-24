@@ -28,6 +28,11 @@
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender;
 
 @optional
+
+- (void)settingsViewControllerDidAppear:(IASKAppSettingsViewController*)sender;
+- (void)settingsViewControllerDidDisappear:(IASKAppSettingsViewController*)sender;
+- (void)settingsViewController:(IASKAppSettingsViewController*)sender didMoveToParentViewController:(UIViewController*) parent;
+
 #pragma mark - UITableView header customization
 - (CGFloat) settingsViewController:(id<IASKViewController>)settingsViewController
                          tableView:(UITableView *)tableView
